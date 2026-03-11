@@ -1,1 +1,0 @@
-<h1>Conteudo completo da página de Sobre </h1>
