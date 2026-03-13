@@ -13,7 +13,7 @@ class RastreamentoController extends Controller
     public function __invoke(Request $request)
     {
         //
-        $codigoRastreio = $request->input('codigo_rastreio');
+        $codigoRastreio = $request->input('codigo_rastreio', '');
 
         $frete = Frete::where('codigo_rastreio', $codigoRastreio)
                             ->with('etapas')
@@ -21,7 +21,9 @@ class RastreamentoController extends Controller
         // dd($frete);
         // dd($frete->etapas);
 
-
+        if(! $frete){
+            return redirect()->back()->with('error', 'Frete não encontrado');
+        }
         return view('frete.rastreamento', [
             'frete' => $frete
         ]);
